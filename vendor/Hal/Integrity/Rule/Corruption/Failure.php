@@ -1,15 +1,15 @@
 <?php
 
-namespace Hal\Integrity\Corruption;
+namespace Hal\Integrity\Rule\Corruption;
 
-use Hal\Integrity\FailureAbstract;
+use Hal\Integrity\Failure\FailureAbstract;
 
 /**
- * class Hal\Integrity\Corruption\Failure
+ * class Hal\Integrity\Rule\Corruption\Failure
  *
  * @version 1
- * @package Hal\Integrity\Corruption
- * @namespace Hal\Integrity\Corruption
+ * @package Hal\Integrity\Rule\Corruption
+ * @namespace Hal\Integrity\Rule\Corruption
  * @extends Hal\Integrity\FailureAbstract
  */
 Class Failure extends FailureAbstract {

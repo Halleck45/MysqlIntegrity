@@ -1,16 +1,16 @@
 <?php
 
-namespace Hal\Integrity\Corruption;
+namespace Hal\Integrity\Rule\Corruption;
 
-use Hal\Integrity\CheckerAbstract;
+use Hal\Integrity\Checker\CheckerAbstract;
 
 /**
- * class Hal\Integrity\Corruption\Checker
+ * class Hal\Integrity\Rule\Corruption\Checker
  *
  * @version 1
- * @package Hal\Integrity\Corruption
- * @namespace Hal\Integrity\Corruption
- * @extends Hal\Integrity\CheckerAbstract
+ * @package Hal\Integrity\Rules\Corruption
+ * @namespace Hal\Integrity\Rule\Corruption
+ * @extends Hal\Integrity\Rule\CheckerAbstract
  */
 Class Checker extends CheckerAbstract {
 

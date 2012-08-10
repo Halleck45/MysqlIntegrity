@@ -1,15 +1,15 @@
 <?php
 
-namespace Hal\Integrity\ForeignKey;
+namespace Hal\Integrity\Rule\ForeignKey;
 
-use Hal\Integrity\CheckerAbstract;
+use Hal\Integrity\Checker\CheckerAbstract;
 
 /**
- * class Hal\Integrity\ForeignKey\Checker
+ * class Hal\Integrity\Rule\ForeignKey\Checker
  *
  * @version 1
- * @package Hal\Integrity\ForeignKey
- * @namespace Hal\Integrity\ForeignKey
+ * @package Hal\Integrity\Rule\ForeignKey
+ * @namespace Hal\Integrity\Rule\ForeignKey
  * @extends Hal\Integrity\CheckerAbstract
  */
 Class Checker extends CheckerAbstract{

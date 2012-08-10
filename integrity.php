@@ -58,8 +58,8 @@ $describer = new Describer($requester, $cache);
 // Checker
 $checker = new \Hal\Integrity\Runner();
 $checker
-//        ->add(new \Hal\Integrity\ForeignKey\Checker($describer, $requester, $connector))
-        ->add(new \Hal\Integrity\Corruption\Checker($describer, $requester, $connector))
+        ->add(new \Hal\Integrity\Rule\ForeignKey\Checker($describer, $requester, $connector))
+        ->add(new \Hal\Integrity\Rule\Corruption\Checker($describer, $requester, $connector))
 ;
 
 //

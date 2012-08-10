@@ -1,13 +1,13 @@
 <?php
 
-namespace Hal\Integrity;
+namespace Hal\Integrity\Failure;
 
 /**
  * interface Hal\Integrity\FailureInterface
  *
  * @version 1
- * @package Hal\Integrity
- * @namespace Hal\Integrity
+ * @package Hal\Integrity\Failure
+ * @namespace Hal\Integrity\Failure
  */
 interface FailureInterface {
 

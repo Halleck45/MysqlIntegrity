@@ -1,16 +1,16 @@
 <?php
 
-namespace Hal\Integrity\ForeignKey;
+namespace Hal\Integrity\Rule\ForeignKey;
 
-use Hal\Integrity\FailureAbstract;
+use Hal\Integrity\Failure\FailureAbstract;
 
 /**
- * class Hal\Integrity\ForeignKey\Failure
+ * class Hal\Integrity\Rule\ForeignKey\Failure
  *
  * @version 1
- * @package Hal\Integrity\ForeignKey
- * @namespace Hal\Integrity\ForeignKey
- * @extends Hal\Integrity\FailureAbstract
+ * @package Hal\Integrity\Rule\ForeignKey
+ * @namespace Hal\Integrity\Rule\ForeignKey
+ * @extends Hal\Integrity\Failure\FailureAbstract
  */
 Class Failure extends FailureAbstract {
 

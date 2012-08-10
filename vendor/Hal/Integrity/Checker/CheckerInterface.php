@@ -1,6 +1,6 @@
 <?php
 
-namespace Hal\Integrity;
+namespace Hal\Integrity\Checker;
 
 use \Hal\Core\Database\Describer,
     \Hal\Core\Database\RequesterInterface,
@@ -10,8 +10,8 @@ use \Hal\Core\Database\Describer,
  * interface Hal\Integrity\CheckerInterface
  *
  * @version 1
- * @package Hal\Integrity
- * @namespace Hal\Integrity
+ * @package Hal\Integrity\Checker
+ * @namespace Hal\Integrity\Checker
  */
 interface CheckerInterface {
 

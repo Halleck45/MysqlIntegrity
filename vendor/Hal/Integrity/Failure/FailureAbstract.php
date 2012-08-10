@@ -1,14 +1,14 @@
 <?php
 
-namespace Hal\Integrity;
+namespace Hal\Integrity\Failure;
 
 /**
  * class Hal\Integrity\FailureAbstract
  *
  * @version 1
- * @package Hal\Integrity
- * @namespace Hal\Integrity
- * @implements Hal\Integrity\FailureInterface
+ * @package Hal\Integrity\Failure
+ * @namespace Hal\Integrity\Failure
+ * @implements Hal\Integrity\Failure\FailureInterface
  */
 abstract class FailureAbstract implements FailureInterface {
 

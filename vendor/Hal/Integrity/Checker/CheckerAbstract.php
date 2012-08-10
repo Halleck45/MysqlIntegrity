@@ -1,18 +1,18 @@
 <?php
 
-namespace Hal\Integrity;
+namespace Hal\Integrity\Checker;
 
 use \Hal\Core\Database\Describer,
     \Hal\Core\Database\RequesterInterface,
     Hal\Core\Database\ConnectorInterface;
 
 /**
- * class Hal\Integrity\CheckerAbstract
+ * class Hal\Integrity\Checker\CheckerAbstract
  *
  * @version 1
- * @package Hal\Integrity
- * @namespace Hal\Integrity
- * @implements Hal\Integrity\CheckerInterface
+ * @package Hal\Integrity\Checker
+ * @namespace Hal\Integrity\Checker
+ * @implements Hal\Integrity\Checker\CheckerInterface
  */
 abstract class CheckerAbstract implements CheckerInterface {
 

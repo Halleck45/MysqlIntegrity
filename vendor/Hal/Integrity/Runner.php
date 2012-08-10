@@ -2,6 +2,8 @@
 
 namespace Hal\Integrity;
 
+use Hal\Integrity\Checker\CheckerInterface;
+
 /**
  * class Hal\Integrity\Runner
  *
