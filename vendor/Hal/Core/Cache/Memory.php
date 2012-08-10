@@ -43,7 +43,7 @@ class Memory implements CacheInterface{
     public function get($id) {
         $id = (string) $id;
         $return = null;
-        if (self::isRegistered($id)) {
+        if ($this->isRegistered($id)) {
             $return = $this->_tCached[$id];
         }
         return $return;
@@ -68,7 +68,7 @@ class Memory implements CacheInterface{
      */
     public function clear($id) {
         $id = (string) $id;
-        if (self::isRegistered($id)) {
+        if ($this->isRegistered($id)) {
             unset($this->_tCached[$id]);
         }
         return $this;
