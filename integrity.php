@@ -8,6 +8,7 @@ use \Hal\Core\Console\Argument,
     Hal\Core\Database\Connector as Connector,
     Hal\Core\Database\Requester as Requester,
     \Hal\Core\Database\Describer;
+
 if ($argc <= 1) {
     $help = <<<EOT
    
@@ -57,7 +58,6 @@ $describer = new Describer($requester, $cache);
 // Checker
 $fkChecker = new \Hal\Integrity\ForeignKey\Checker($describer, $requester, $connector);
 
-
 //
 // Main program
 $tables = $describer->listTables();
@@ -95,25 +95,9 @@ switch (Argument::get('action')) {
     default:
 
         foreach ($tables as $table) {
-
             $failures = $fkChecker->getFailuresOf($table);
-
-            if (!empty($failures)) {
-
-                foreach ($failures as $failure) {
-                    fwrite(\STDOUT, sprintf(PHP_EOL . 'table %1$s, with table %2$s'
-                                    , $table
-                                    , $failure->relation['REFERENCED_TABLE_NAME']
-                            ));
-                    foreach ($failure->rowset as $row) {
-                        fwrite(\STDOUT, PHP_EOL);
-                        foreach ($row as $col => $value) {
-                            fwrite(\STDOUT, sprintf("\t%s: %s", $col, $value));
-                        }
-                    }
-
-                    fwrite(\STDOUT, PHP_EOL);
-                }
+            foreach ($failures as $failure) {
+                fwrite(\STDOUT, $failure->toString() . PHP_EOL);
             }
         }
         break;

@@ -59,22 +59,15 @@ Class Checker {
 
         $failures = array();
 
-        try {
-            $relations = $this->_describer->getRelationsOf($table);
-            $primaryKeys = $this->_describer->getPrimaryKeyOf($table);
-        } catch (\PDOException $e) {
-            fwrite(\STDERR, PHP_EOL . sprintf('We cannot retrieve main informations about %s : %s', $table, $e->getMessage()));
-            return array();
-        }
-        
-
+        $relations = $this->_describer->getRelationsOf($table);
+        $primaryKeys = $this->_describer->getPrimaryKeyOf($table);
         foreach ($relations['with'] as $relation) {
-
-            $selectedCols = $relation['TABLE_NAME'] . '.' . $relation['COLUMN_NAME'];
-            foreach ($primaryKeys as $pk) {
-                $selectedCols .= ', ' . $relation['TABLE_NAME'] . '.' . $pk;
+            
+            $selectedCols = $relation['TABLE_NAME'].'.'.$relation['COLUMN_NAME'];
+            foreach($primaryKeys as $pk) {
+                $selectedCols .= ', '.$relation['TABLE_NAME'].'.'.$pk;
             }
-
+            
             $query = sprintf('Select %7$s From %1$s.%2$s Left Join %3$s.%4$s ON %1$s.%2$s.%5$s = %3$s.%4$s.%6$s Where %3$s.%4$s.%6$s Is Null'
                     , $this->_connector->getName()
                     , $table
@@ -86,7 +79,7 @@ Class Checker {
             );
             try {
                 $rowset = $this->_requester->getRowset($query);
-            } catch (\PDOException $e) {
+            } catch (\Exception $e) {
                 fwrite(\STDERR, PHP_EOL . sprintf('We cannot retrieve information about %s : %s', $table, $e->getMessage()));
                 return array();
             }
