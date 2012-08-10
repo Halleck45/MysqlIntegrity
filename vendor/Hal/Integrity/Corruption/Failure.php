@@ -1,39 +1,28 @@
 <?php
 
-namespace Hal\Integrity\ForeignKey;
+namespace Hal\Integrity\Corruption;
+
+use Hal\Integrity\FailureAbstract;
 
 /**
- * class Hal\Integrity\ForeignKey\Failure
+ * class Hal\Integrity\Corruption\Failure
  *
  * @version 1
- * @package Hal\Integrity\ForeignKey
- * @namespace Hal\Integrity\ForeignKey
+ * @package Hal\Integrity\Corruption
+ * @namespace Hal\Integrity\Corruption
+ * @extends Hal\Integrity\FailureAbstract
  */
-Class Failure {
+Class Failure extends FailureAbstract {
 
     /**
-     * Relation
+     * Get an explicit message
      * 
-     * @var array
+     * @return string
      */
-    public $relation;
-
-    /**
-     * Rowset
-     * 
-     * @var array
-     */
-    public $rowset;
-
-    /**
-     * Constructor
-     * 
-     * @param array $relation
-     * @param array $rowset
-     */
-    public function __construct(array $relation, array $rowset) {
-        $this->relation = $relation;
-        $this->rowset = $rowset;
+    public function toString() {
+        return sprintf('Table or view is corrupted : references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them'
+                        , $this->relation['TABLE_NAME']
+        );
     }
 
 }

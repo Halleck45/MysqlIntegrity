@@ -53,7 +53,7 @@ class Requester implements RequesterInterface {
     public function error(\PDO $oPdo) {
         $tErr = $oPdo->errorInfo();
         $sErrMsg = $tErr[2];
-        throw new \Exception('Erreur SQL : ' . $sErrMsg);
+        throw new \PDOException($sErrMsg);
     }
 
     /**
