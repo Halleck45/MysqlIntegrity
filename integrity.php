@@ -65,30 +65,37 @@ $checker
 // Main program
 $tables = $describer->listTables();
 switch (Argument::get('action')) {
+    
+    
     case 'clean':
         $cleaner = new \Hal\Integrity\Cleaner($requester);
         foreach ($tables as $table) {
+            
             $failures = $checker->getFailuresOf($table);
             if (!empty($failures)) {
                 foreach ($failures as $failure) {
-                    fwrite(\STDOUT, sprintf(PHP_EOL . 'Removing %2$d row(s) from table %1$s', $table, \sizeof($failure->getRowset())));
+                    fwrite(\STDOUT, sprintf('Removing %2$d row(s) from table %1$s', $table, \sizeof($failure->getRowset())).PHP_EOL);
                     $cleaner->clean($failure);
                 }
             }
+            
         }
         break;
+        
+        
     case 'list':
     default:
 
         foreach ($tables as $table) {
+        
             $failures = $checker->getFailuresOf($table);
             foreach ($failures as $failure) {
                 fwrite(\STDOUT, $failure->toString() . PHP_EOL);
             }
+            
         }
         break;
 }
-fwrite(\STDOUT, PHP_EOL);
 
 
 
