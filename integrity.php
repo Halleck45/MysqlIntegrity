@@ -56,7 +56,11 @@ $describer = new Describer($requester, $cache);
 
 //
 // Checker
-$fkChecker = new \Hal\Integrity\ForeignKey\Checker($describer, $requester, $connector);
+$checker = new \Hal\Integrity\Runner();
+$checker
+//        ->add(new \Hal\Integrity\ForeignKey\Checker($describer, $requester, $connector))
+        ->add(new \Hal\Integrity\Corruption\Checker($describer, $requester, $connector))
+;
 
 //
 // Main program
@@ -66,7 +70,7 @@ switch (Argument::get('action')) {
         foreach ($tables as $table) {
 
             $requester->exec('Set FOREIGN_KEY_CHECKS = 0;');
-            $failures = $fkChecker->getFailuresOf($table);
+            $failures = $checker->getFailuresOf($table);
 
             if (!empty($failures)) {
 
@@ -95,7 +99,7 @@ switch (Argument::get('action')) {
     default:
 
         foreach ($tables as $table) {
-            $failures = $fkChecker->getFailuresOf($table);
+            $failures = $checker->getFailuresOf($table);
             foreach ($failures as $failure) {
                 fwrite(\STDOUT, $failure->toString() . PHP_EOL);
             }

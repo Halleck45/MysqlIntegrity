@@ -2,9 +2,7 @@
 
 namespace Hal\Integrity\Corruption;
 
-use \Hal\Core\Database\Describer,
-    \Hal\Core\Database\RequesterInterface,
-    Hal\Core\Database\ConnectorInterface;
+use Hal\Integrity\CheckerAbstract;
 
 /**
  * class Hal\Integrity\Corruption\Checker
@@ -12,42 +10,9 @@ use \Hal\Core\Database\Describer,
  * @version 1
  * @package Hal\Integrity\Corruption
  * @namespace Hal\Integrity\Corruption
+ * @extends Hal\Integrity\CheckerAbstract
  */
-Class Checker {
-
-    /**
-     * Describer
-     * 
-     * @var \Hal\Core\Database\Describer
-     */
-    private $_describer;
-
-    /**
-     * Connector 
-     * 
-     * @var Hal\Core\Database\ConnectorInterface 
-     */
-    private $_connector;
-
-    /**
-     * Requester 
-     * 
-     * @var \Hal\Core\Database\RequesterInterface
-     */
-    private $_requester;
-
-    /**
-     * Constructor
-     * 
-     * @param \Hal\Core\Database\Describer $describer
-     * @param \Hal\Core\Database\RequesterInterface $requester
-     * @param \Hal\Integrity\ForeignKey\Hal\Core\Database\ConnectorInterface $connector
-     */
-    public function __construct(Describer $describer, RequesterInterface $requester, ConnectorInterface $connector) {
-        $this->_connector = $connector;
-        $this->_describer = $describer;
-        $this->_requester = $requester;
-    }
+Class Checker extends CheckerAbstract {
 
     /**
      * List failures of the given table
@@ -57,9 +22,9 @@ Class Checker {
      */
     public function getFailuresOf($table) {
         try {
-            $rowset = $this->_requester->getRowset(sprintf('Select 1 From %s', $table));
+            $this->_requester->getRowset(sprintf('Describe %s', $table));
         } catch (\PDOException $e) {
-            if(false !== strpos($e->getMessage(), 'references invalid table(s) or column(s) or function(s)')) {
+            if (false !== strpos($e->getMessage(), 'references invalid table(s) or column(s) or function(s)')) {
                 $relation = $this->_describer->getRelationsOf($table);
                 return array(new Failure($relation, array()));
             }

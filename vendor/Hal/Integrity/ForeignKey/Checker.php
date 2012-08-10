@@ -2,9 +2,7 @@
 
 namespace Hal\Integrity\ForeignKey;
 
-use \Hal\Core\Database\Describer,
-    \Hal\Core\Database\RequesterInterface,
-    Hal\Core\Database\ConnectorInterface;
+use Hal\Integrity\CheckerAbstract;
 
 /**
  * class Hal\Integrity\ForeignKey\Checker
@@ -12,42 +10,9 @@ use \Hal\Core\Database\Describer,
  * @version 1
  * @package Hal\Integrity\ForeignKey
  * @namespace Hal\Integrity\ForeignKey
+ * @extends Hal\Integrity\CheckerAbstract
  */
-Class Checker {
-
-    /**
-     * Describer
-     * 
-     * @var \Hal\Core\Database\Describer
-     */
-    private $_describer;
-
-    /**
-     * Connector 
-     * 
-     * @var Hal\Core\Database\ConnectorInterface 
-     */
-    private $_connector;
-
-    /**
-     * Requester 
-     * 
-     * @var \Hal\Core\Database\RequesterInterface
-     */
-    private $_requester;
-
-    /**
-     * Constructor
-     * 
-     * @param \Hal\Core\Database\Describer $describer
-     * @param \Hal\Core\Database\RequesterInterface $requester
-     * @param \Hal\Integrity\ForeignKey\Hal\Core\Database\ConnectorInterface $connector
-     */
-    public function __construct(Describer $describer, RequesterInterface $requester, ConnectorInterface $connector) {
-        $this->_connector = $connector;
-        $this->_describer = $describer;
-        $this->_requester = $requester;
-    }
+Class Checker extends CheckerAbstract{
 
     /**
      * List failures of the given table
@@ -66,7 +31,7 @@ Class Checker {
             fwrite(\STDERR, PHP_EOL . sprintf('We cannot retrieve main informations about %s : %s', $table, $e->getMessage()));
             return array();
         }
-        
+
 
         foreach ($relations['with'] as $relation) {
 
