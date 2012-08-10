@@ -10,7 +10,6 @@ use Hal\Integrity\Checker\CheckerInterface;
  * @version 1
  * @package Hal\Integrity
  * @namespace Hal\Integrity
- * @implements Hal\Integrity\FailureInterface
  */
 class Runner {
 

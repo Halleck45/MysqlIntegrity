@@ -29,14 +29,14 @@ interface FailureInterface {
     /**
      * Get the associated rowset
      * 
-     * @return array
+     * @return ContextInterface
      */
     public function getRowset();
 
     /**
-     * Get the relation map associated to this failure
+     * Get the context associated to this failure
      * 
-     * @return array
+     * @return Hal\Integrity\Context\ContextInterface
      */
-    public function getRelationMap();
+    public function getContext();
 }

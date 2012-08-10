@@ -53,7 +53,6 @@ $cache = new \Hal\Core\Cache\Memory;
 // Database describer
 $describer = new Describer($requester, $cache);
 
-
 //
 // Checker
 $checker = new \Hal\Integrity\Runner();
@@ -67,32 +66,15 @@ $checker
 $tables = $describer->listTables();
 switch (Argument::get('action')) {
     case 'clean':
+        $cleaner = new \Hal\Integrity\Cleaner($requester);
         foreach ($tables as $table) {
-
-            $requester->exec('Set FOREIGN_KEY_CHECKS = 0;');
             $failures = $checker->getFailuresOf($table);
-
             if (!empty($failures)) {
-
                 foreach ($failures as $failure) {
-                    fwrite(\STDOUT, sprintf(PHP_EOL . 'Removing %2$d row(s) from table %1$s', $table, \sizeof($failure->rowset)));
-                    $query = sprintf('DELETE FROM %s WHERE 0 = 1', $table);
-                    foreach ($failure->rowset as $row) {
-                        $query .= ' OR ( 1 = 1 ';
-                        foreach ($row as $col => $value) {
-                            $query.= sprintf(' AND %1$s = %2$s'
-                                    , $col
-                                    , $requester->protect($value)
-                            );
-                        }
-                        $query .= ')';
-                    }
-                    $requester->exec($query);
-
-                    fwrite(\STDOUT, '...DONE' . PHP_EOL);
+                    fwrite(\STDOUT, sprintf(PHP_EOL . 'Removing %2$d row(s) from table %1$s', $table, \sizeof($failure->getRowset())));
+                    $cleaner->clean($failure);
                 }
             }
-            $requester->exec('Set FOREIGN_KEY_CHECKS = 1;');
         }
         break;
     case 'list':

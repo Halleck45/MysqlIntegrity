@@ -49,12 +49,12 @@ abstract class FailureAbstract implements FailureInterface {
     }
 
     /**
-     * Get the relation map associated to this failure
+     * Get the context associated to this failure
      * 
-     * @return array
+     * @return Hal\Integrity\Context\ContextInterface
      */
-    public function getRelationMap() {
-        return $this->relation;
+    public function getContext() {
+        return $this->context;
     }
 
 }
