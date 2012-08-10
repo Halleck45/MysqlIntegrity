@@ -2,7 +2,8 @@
 
 namespace Hal\Integrity\Rule\ForeignKey;
 
-use Hal\Integrity\Checker\CheckerAbstract;
+use Hal\Integrity\Checker\CheckerAbstract,
+    Hal\Integrity\Context\Context;
 
 /**
  * class Hal\Integrity\Rule\ForeignKey\Checker
@@ -12,7 +13,7 @@ use Hal\Integrity\Checker\CheckerAbstract;
  * @namespace Hal\Integrity\Rule\ForeignKey
  * @extends Hal\Integrity\CheckerAbstract
  */
-Class Checker extends CheckerAbstract{
+Class Checker extends CheckerAbstract {
 
     /**
      * List failures of the given table
@@ -28,7 +29,7 @@ Class Checker extends CheckerAbstract{
             $relations = $this->_describer->getRelationsOf($table);
             $primaryKeys = $this->_describer->getPrimaryKeyOf($table);
         } catch (\PDOException $e) {
-            fwrite(\STDERR, PHP_EOL . sprintf('We cannot retrieve main informations about %s : %s', $table, $e->getMessage()));
+            fwrite(\STDERR, sprintf('We cannot retrieve main informations about %s : %s', $table, $e->getMessage()).PHP_EOL);
             return array();
         }
 
@@ -52,12 +53,13 @@ Class Checker extends CheckerAbstract{
             try {
                 $rowset = $this->_requester->getRowset($query);
             } catch (\PDOException $e) {
-                fwrite(\STDERR, PHP_EOL . sprintf('We cannot retrieve information about %s : %s', $table, $e->getMessage()));
+                fwrite(\STDERR, sprintf('We cannot retrieve information about %s : %s', $table, $e->getMessage()) . PHP_EOL);
                 return array();
             }
 
             if (sizeof($rowset) > 0) {
-                $failure = new Failure($relation, $rowset);
+                $context = new Context($table, $relation);
+                $failure = new Failure($context, $rowset);
                 array_push($failures, $failure);
             }
         }

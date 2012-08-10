@@ -1,7 +1,7 @@
 <?php
 
 namespace Hal\Integrity\Failure;
-
+use Hal\Integrity\Context\ContextInterface;
 /**
  * interface Hal\Integrity\FailureInterface
  *
@@ -17,7 +17,7 @@ interface FailureInterface {
      * @param array $relation
      * @param array $rowset
      */
-    public function __construct(array $relation, array $rowset);
+    public function __construct(ContextInterface $context, array $rowset);
 
     /**
      * Get an explicit message

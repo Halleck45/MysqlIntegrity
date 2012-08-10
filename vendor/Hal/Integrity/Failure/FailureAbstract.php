@@ -2,6 +2,8 @@
 
 namespace Hal\Integrity\Failure;
 
+use Hal\Integrity\Context\ContextInterface;
+
 /**
  * class Hal\Integrity\FailureAbstract
  *
@@ -13,11 +15,11 @@ namespace Hal\Integrity\Failure;
 abstract class FailureAbstract implements FailureInterface {
 
     /**
-     * Relation
+     * Context
      * 
-     * @var array
+     * @var Hal\Integrity\Context\ContextInterface
      */
-    protected $relation;
+    protected $context;
 
     /**
      * Rowset
@@ -32,8 +34,8 @@ abstract class FailureAbstract implements FailureInterface {
      * @param array $relation
      * @param array $rowset
      */
-    public function __construct(array $relation, array $rowset) {
-        $this->relation = $relation;
+    public function __construct(ContextInterface $relation, array $rowset) {
+        $this->context = $relation;
         $this->rowset = $rowset;
     }
 

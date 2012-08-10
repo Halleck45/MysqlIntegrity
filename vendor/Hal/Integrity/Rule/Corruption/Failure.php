@@ -20,8 +20,8 @@ Class Failure extends FailureAbstract {
      * @return string
      */
     public function toString() {
-        return sprintf('Table or view is corrupted : references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them'
-                        , $this->relation['TABLE_NAME']
+        return sprintf('Table or view %s is corrupted : references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them'
+                        , $this->context->getTable()
         );
     }
 

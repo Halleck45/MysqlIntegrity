@@ -2,7 +2,8 @@
 
 namespace Hal\Integrity\Rule\Corruption;
 
-use Hal\Integrity\Checker\CheckerAbstract;
+use Hal\Integrity\Checker\CheckerAbstract,
+    Hal\Integrity\Context\Context;
 
 /**
  * class Hal\Integrity\Rule\Corruption\Checker
@@ -26,7 +27,8 @@ Class Checker extends CheckerAbstract {
         } catch (\PDOException $e) {
             if (false !== strpos($e->getMessage(), 'references invalid table(s) or column(s) or function(s)')) {
                 $relation = $this->_describer->getRelationsOf($table);
-                return array(new Failure($relation, array()));
+                $context = new Context($table, $relation);
+                return array(new Failure($context, array()));
             }
         }
         return array();

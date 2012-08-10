@@ -20,9 +20,10 @@ Class Failure extends FailureAbstract {
      * @return string
      */
     public function toString() {
+        $map = $this->context->getMap();
         $string = sprintf('Table %1$s has corrupted relation with %2$s'
-                , $this->relation['TABLE_NAME']
-                , $this->relation['REFERENCED_TABLE_NAME']
+                , $map['TABLE_NAME']
+                , $map['REFERENCED_TABLE_NAME']
         );
         foreach ($this->rowset as $row) {
             $string .= \PHP_EOL;
